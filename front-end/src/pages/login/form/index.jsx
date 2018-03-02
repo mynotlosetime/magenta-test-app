@@ -44,7 +44,7 @@ export default class LoginForm extends React.Component {
           />
         </Form.Field>
         <Form.Field>
-          <Button type="submit" fluid content="Login" />
+          <Button type="submit" fluid content="Войти" />
         </Form.Field>
         {errorMessage}
       </Form>

@@ -39,7 +39,7 @@ class HomePage extends React.Component {
         <div>
           <Menu pointing secondary>
             <Menu.Menu position="right">
-              <Menu.Item name="logout" onClick={this.logout} />
+              <Menu.Item name="Выход" onClick={this.logout} />
             </Menu.Menu>
           </Menu>
         </div>
