@@ -26,6 +26,7 @@ import "./styles.less";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { logoutRequest } from "../../common/global.actions";
+import YaMap from "../../components/YaMap";
 
 class HomePage extends React.Component {
   basePath = "/home";
@@ -43,10 +44,16 @@ class HomePage extends React.Component {
             </Menu.Menu>
           </Menu>
         </div>
-        <div className="home-body" />
+        <div className="home-body">
+          <YaMap onPointSelect={this.onPointSelect} />
+        </div>
       </div>
     );
   }
+  onPointSelect = coordinates => {
+    console.log(coordinates);
+  };
 }
+
 const withConnect = connect();
 export default compose(withConnect)(HomePage);
