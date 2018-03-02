@@ -15,4 +15,10 @@ export const SIGNAL_REQUEST = "global/SIGNAL_REQUEST",
       type: SIGNAL_RESPONSE,
       error
     };
+  },
+  LOGOUT_REQUEST = "global/LOGOUT_REQUEST",
+  logoutRequest = () => {
+    return {
+      type: LOGOUT_REQUEST
+    };
   };

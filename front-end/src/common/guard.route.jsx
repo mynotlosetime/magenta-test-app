@@ -12,9 +12,6 @@ class GuardRoute extends React.Component {
       <Route
         path={path}
         render={props => {
-          if (this.props.isForbidden) {
-            return <Redirect to={{ pathname: "/" }} />;
-          }
           if (this.props.isAuth) {
             return <Component {...props} />;
           } else {
@@ -29,10 +26,8 @@ class GuardRoute extends React.Component {
       />
     );
   }
-  async canActivate() {
-    try {
-      this.props.dispatch(signal());
-    } catch (e) {}
+  canActivate() {
+    this.props.dispatch(signal());
   }
 }
 

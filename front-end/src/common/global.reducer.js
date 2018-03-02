@@ -1,12 +1,14 @@
 import { fromJS } from "immutable";
-import { SIGNAL, SIGNAL_REQUEST, SIGNAL_RESPONSE } from "./global.actions";
+import {
+  SIGNAL,
+  SIGNAL_REQUEST,
+  SIGNAL_RESPONSE,
+  LOGOUT_REQUEST
+} from "./global.actions";
 
 const initialState = fromJS({
-  loading: false,
-  error: false,
   currentUser: false,
-  isAuth: false,
-  isForbidden: false
+  isAuth: false
 });
 
 function globalReducer(state = initialState, action) {
@@ -14,11 +16,11 @@ function globalReducer(state = initialState, action) {
     case SIGNAL_REQUEST:
       return state.set("isAuth", false);
     case SIGNAL_RESPONSE:
-      if (!action.error) {
-        return state.set("isAuth", true);
-      } else {
-        return state.set("isAuth", false).set("isForbidden", true);
-      }
+      return !action.error
+        ? state.set("isAuth", true)
+        : state.set("isAuth", false);
+    case LOGOUT_REQUEST:
+      return state.set("isAuth", false);
   }
   return state;
 }

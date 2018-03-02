@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Req
-} from "@nestjs/common";
+import { Controller, Get, Post, Body, Req } from "@nestjs/common";
 import { UserService } from "../models/entity/user/user.service";
 import config from "../config";
 import { ForbiddenException } from "../common/exceptions/forbidden.exceprion";
@@ -29,12 +23,12 @@ export class AuthController {
   @Post("logout")
   async logout(@Req() req) {
     req.session.destroy();
-    console.log(req.session);
+    return true;
   }
   @Get("signal")
   async signal(@Req() req) {
     if (req.session.user) {
-      return [];
+      return [req.session.user];
     } else {
       throw new ForbiddenException("No Access");
     }

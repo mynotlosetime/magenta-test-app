@@ -25,13 +25,13 @@ import {
 import "./styles.less";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { signal } from "../../common/global.actions";
+import { logoutRequest } from "../../common/global.actions";
 
 class HomePage extends React.Component {
   basePath = "/home";
   componentDidMount() {}
   logout = () => {
-    this.props.dispatch(signal());
+    this.props.dispatch(logoutRequest());
   };
   render() {
     return (
