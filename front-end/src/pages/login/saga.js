@@ -9,7 +9,6 @@ import {
   loginSuccess,
   loginFailure
 } from "./actions";
-import request from "../../../utils/request";
 import axios from "axios";
 import { push } from "react-router-redux";
 

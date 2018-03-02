@@ -34,8 +34,10 @@ export default class YaMap extends React.Component {
         this.myPlacemark = this.createPlacemark(coords);
         this.map.geoObjects.add(this.myPlacemark);
         // Слушаем событие окончания перетаскивания на метке.
-        this.myPlacemark.events.add("dragend", function() {
-          getAddress(myPlacemark.geometry.getCoordinates());
+        this.myPlacemark.events.add("dragend", () => {
+          this.getAddress(
+            this.myPlacemark.geometry.getCoordinates()
+          );
         });
       }
       this.getAddress(coords);
@@ -63,7 +65,9 @@ export default class YaMap extends React.Component {
     ymaps.geocode(coords).then(res => {
       var firstGeoObject = res.geoObjects.get(0);
       // кидаем событие выбора точки
-      this.props.onPointSelect(firstGeoObject.geometry.getCoordinates());
+      this.props.onPointSelect(
+        firstGeoObject.geometry.getCoordinates()
+      );
 
       this.myPlacemark.properties.set({
         // Формируем строку с данными об объекте.
@@ -73,7 +77,8 @@ export default class YaMap extends React.Component {
             ? firstGeoObject.getLocalities()
             : firstGeoObject.getAdministrativeAreas(),
           // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
-          firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
+          firstGeoObject.getThoroughfare() ||
+            firstGeoObject.getPremise()
         ]
           .filter(Boolean)
           .join(", "),

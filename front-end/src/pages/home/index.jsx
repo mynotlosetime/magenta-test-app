@@ -28,13 +28,35 @@ import { compose } from "redux";
 import { logoutRequest } from "../../common/global.actions";
 import YaMap from "../../components/YaMap";
 import AddressSearch from "../../components/AddressSearch";
+import { addressesRequest } from "./actions";
+import reducer from "./reducer";
+import saga from "./saga";
+import injectReducer from "../../../utils/injectReducer";
+import injectSaga from "../../../utils/injectSaga";
 
 class HomePage extends React.Component {
   basePath = "/home";
+
+  map;
+  addressOptions = [
+    // {
+    //   title: "Aufderhar, Jast and Bashirian",
+    //   description: "Robust client-driven protocol",
+    //   value: "1"
+    // },
+    // {
+    //   title: "sdasd",
+    //   description: "dddddddddd",
+    //   value: "2"
+    // }
+  ];
+
   componentDidMount() {}
+
   logout = () => {
     this.props.dispatch(logoutRequest());
   };
+
   render() {
     return (
       <div className="home-layout">
@@ -46,16 +68,41 @@ class HomePage extends React.Component {
           </Menu>
         </div>
         <div className="home-body">
-          <YaMap onPointSelect={this.onPointSelect} />
-          <AddressSearch />
+          <AddressSearch
+            loading={this.props.addressesLoading}
+            onSearch={this.onAdressSearch}
+            onResultSelect={this.onPointSelect}
+            options={this.addressOptions}
+          />
+          <YaMap
+            ref={map => (this.map = map)}
+            onPointSelect={this.onPointSelect}
+          />
         </div>
       </div>
     );
   }
-  onPointSelect = coordinates => {
-    console.log(coordinates);
+
+  onAdressSearch = queryString => {
+    this.props.dispatch(addressesRequest(queryString));
+    //запрос на сервер яндекса -> получение addressOptions
+  };
+  onPointSelect = geoObject => {
+    // тут будет полный GeoObject
+
+    console.log(geoObject);
+    //выставление в селект или карту -> запрос на сервер погоды
   };
 }
 
-const withConnect = connect();
-export default compose(withConnect)(HomePage);
+const withConnect = connect(state => {
+  return state.get("home").toJS();
+});
+const withSaga = injectSaga({ key: "homeSaga", saga });
+const withReducer = injectReducer({
+  key: "home",
+  reducer
+});
+export default compose(withReducer, withSaga, withConnect)(
+  HomePage
+);

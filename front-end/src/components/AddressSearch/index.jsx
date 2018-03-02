@@ -5,16 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 
 export default class AddressSearch extends React.Component {
-  addressOptions = [
-    {
-      title: "Aufderhar, Jast and Bashirian",
-      description: "Robust client-driven protocol"
-    },
-    {
-      title: "sdasd",
-      description: "dddddddddd"
-    }
-  ];
+  search;
 
   componentDidMount() {}
 
@@ -22,19 +13,25 @@ export default class AddressSearch extends React.Component {
     return (
       <div className="address-search">
         <Search
+          loading={this.props.loading}
           onResultSelect={this.handleResultSelect}
           onSearchChange={this.handleSearchChange}
-          results={this.addressOptions}
+          results={this.props.options}
+          ref={search => (this.search = search)}
         />
       </div>
     );
   }
 
-  handleResultSelect() {
-    console.log("select");
+  handleResultSelect(e) {
+    this.props.onResultSelect(e);
   }
 
-  handleSearchChange() {
-    console.log("change");
-  }
+  searchPendingTimer;
+  handleSearchChange = e => {
+    clearTimeout(this.searchPendingTimer);
+    this.searchPendingTimer = setTimeout(() => {
+      this.props.onSearch(this.search.state.value);
+    }, 400);
+  };
 }
