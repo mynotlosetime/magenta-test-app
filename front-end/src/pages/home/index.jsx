@@ -25,20 +25,15 @@ import {
 import "./styles.less";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { signal } from "../../common/global.actions";
 
 class HomePage extends React.Component {
   basePath = "/home";
-
   componentDidMount() {}
-
-  logout = async () => {
-    const res = await LoginService.signal();
+  logout = () => {
+    this.props.dispatch(signal());
   };
   render() {
-    const activeRoute = this.props.activeRoute,
-      weekLink = this.basePath + "/week",
-      ordersLink = this.basePath + "/orders",
-      dishesLink = this.basePath + "/dishes";
     return (
       <div className="home-layout">
         <div>
@@ -52,18 +47,6 @@ class HomePage extends React.Component {
       </div>
     );
   }
-
-  getLayoutTemplate() {}
-
-  componentDidMount() {}
-
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeRoute: name });
-  };
 }
-const withConnect = connect(state => {
-  return {
-    activeRoute: state.getIn(["route", "location", "pathname"])
-  };
-});
+const withConnect = connect();
 export default compose(withConnect)(HomePage);

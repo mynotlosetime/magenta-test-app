@@ -1,5 +1,3 @@
-import LoginService from "../../services/login.service.js";
-
 export const LOGIN_FAILURE = "pages/login/LOGIN_FAILURE",
   loginFailure = error => {
     return {

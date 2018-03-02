@@ -40,10 +40,6 @@ class LoginPage extends React.Component {
   onSubmit = loginData => {
     this.props.dispatch(tryLogin(loginData));
   };
-  signal = async () => {
-    const res = await LoginService.signal();
-  };
-
   componentDidMount() {}
 }
 

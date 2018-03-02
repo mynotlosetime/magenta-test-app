@@ -1,31 +1,27 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { Dimmer, Loader } from "semantic-ui-react";
-import LoginService from "../services/login.service.js";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { signal } from "./global.actions";
 
-export default class GuardRoute extends React.Component {
-  state = {
-    isAuth: false,
-    isForbidden: false
-  };
-
+class GuardRoute extends React.Component {
   render() {
     const { component: Component, path } = this.props;
-
     return (
       <Route
         path={path}
         render={props => {
-          if (this.state.isForbidden) {
+          if (this.props.isForbidden) {
             return <Redirect to={{ pathname: "/" }} />;
           }
-          if (this.state.isAuth) {
+          if (this.props.isAuth) {
             return <Component {...props} />;
           } else {
             this.canActivate();
             return (
               <Dimmer active>
-                <Loader size="medium">Loading</Loader>
+                <Loader size="medium">Загрузка</Loader>
               </Dimmer>
             );
           }
@@ -35,10 +31,15 @@ export default class GuardRoute extends React.Component {
   }
   async canActivate() {
     try {
-      await LoginService.signal();
-      this.setState({ isAuth: true });
-    } catch (e) {
-      this.setState({ isForbidden: true });
-    }
+      this.props.dispatch(signal());
+    } catch (e) {}
   }
 }
+
+const withConnect = connect(state => {
+  return {
+    isAuth: state.getIn(["global", "isAuth"]),
+    isForbidden: state.getIn(["global", "isForbidden"])
+  };
+});
+export default compose(withConnect)(GuardRoute);

@@ -38,6 +38,7 @@ export default class LoginForm extends React.Component {
         <Form.Field>
           <input
             placeholder="Password"
+            type="password"
             name="password"
             ref={input => (this.passwordInput = input)}
           />

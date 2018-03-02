@@ -3,15 +3,13 @@ import "styles/index.less";
 import LoginPage from "./pages/login";
 import HomePage from "./pages/home";
 import { Button } from "semantic-ui-react";
-import {
-  Redirect,
-  BrowserRouter,
-  Route,
-  Link
-} from "react-router-dom";
+import { Redirect, BrowserRouter, Route, Link } from "react-router-dom";
 import GuardRoute from "./common/guard.route";
+import injectSaga from "../utils/injectSaga";
+import saga from "./common/global.saga";
+import { compose } from "redux";
 
-export default class App extends React.Component {
+class App extends React.Component {
   state = {
     name: null
   };
@@ -31,3 +29,6 @@ export default class App extends React.Component {
 
   componentDidMount() {}
 }
+const withSaga = injectSaga({ key: "global", saga });
+
+export default compose(withSaga)(App);
