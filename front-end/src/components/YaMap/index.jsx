@@ -62,7 +62,9 @@ export default class YaMap extends React.Component {
     this.myPlacemark.properties.set("iconCaption", "поиск...");
     ymaps.geocode(coords).then(res => {
       var firstGeoObject = res.geoObjects.get(0);
+      // кидаем событие выбора точки
       this.props.onPointSelect(firstGeoObject.geometry.getCoordinates());
+
       this.myPlacemark.properties.set({
         // Формируем строку с данными об объекте.
         iconCaption: [

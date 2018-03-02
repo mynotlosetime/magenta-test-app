@@ -27,6 +27,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { logoutRequest } from "../../common/global.actions";
 import YaMap from "../../components/YaMap";
+import AddressSearch from "../../components/AddressSearch";
 
 class HomePage extends React.Component {
   basePath = "/home";
@@ -46,6 +47,7 @@ class HomePage extends React.Component {
         </div>
         <div className="home-body">
           <YaMap onPointSelect={this.onPointSelect} />
+          <AddressSearch />
         </div>
       </div>
     );
