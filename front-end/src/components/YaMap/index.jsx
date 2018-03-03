@@ -53,7 +53,6 @@ export default class YaMap extends React.Component {
       });
     }
     if (address) {
-      // выставление из слекта
       this.setPlaceMarkAddress(address);
     } else {
       this.getAddress(coords);
@@ -111,7 +110,7 @@ export default class YaMap extends React.Component {
         this.props.mapPoint.address != this.innerMapPointAddress;
 
       if (selectOutside) {
-        // new mapPoint select from search
+        // выбор был сделан из внешнего источника ( селект )
         this.setPlaceMarkPosition(
           this.props.mapPoint.coordinates,
           this.props.mapPoint.address

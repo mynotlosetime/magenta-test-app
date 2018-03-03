@@ -44,7 +44,14 @@ export function* geoCoderYandex(action) {
 }
 
 export function* getWeather(action) {
-  console.log("request: ", action.coordinates);
+  const response = yield call(axios.get, "/api/weather", {
+    params: {
+      latitude: action.coordinates[0],
+      longitude: action.coordinates[1]
+    }
+  });
+
+  console.log("response: ", response);
 }
 
 /**

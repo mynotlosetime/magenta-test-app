@@ -14,6 +14,6 @@ export class RolesGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const isPermitController =
       context.parent.name == AuthController.name;
-    return isPermitController || dataOrRequest.session.user;
+    return isPermitController || dataOrRequest.session;
   }
 }
