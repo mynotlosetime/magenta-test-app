@@ -23,9 +23,10 @@ export default class AddressSearch extends React.Component {
     );
   }
 
-  handleResultSelect(e) {
-    this.props.onResultSelect(e);
-  }
+  handleResultSelect = (e, search) => {
+    this.search.setValue(search.result.key);
+    this.props.onResultSelect(search.result.key);
+  };
 
   searchPendingTimer;
   handleSearchChange = e => {
@@ -34,4 +35,9 @@ export default class AddressSearch extends React.Component {
       this.props.onSearch(this.search.state.value);
     }, 400);
   };
+
+  setSearchValue(value) {
+    this.search.setValue(value);
+    this.props.onSearch(value);
+  }
 }

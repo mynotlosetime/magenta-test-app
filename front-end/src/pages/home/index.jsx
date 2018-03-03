@@ -28,7 +28,12 @@ import { compose } from "redux";
 import { logoutRequest } from "../../common/global.actions";
 import YaMap from "../../components/YaMap";
 import AddressSearch from "../../components/AddressSearch";
-import { addressesRequest } from "./actions";
+import {
+  addressesRequest,
+  geoCoderRequest,
+  weatherRequest,
+  geoCoderResponse
+} from "./actions";
 import reducer from "./reducer";
 import saga from "./saga";
 import injectReducer from "../../../utils/injectReducer";
@@ -36,20 +41,8 @@ import injectSaga from "../../../utils/injectSaga";
 
 class HomePage extends React.Component {
   basePath = "/home";
-
   map;
-  addressOptions = [
-    // {
-    //   title: "Aufderhar, Jast and Bashirian",
-    //   description: "Robust client-driven protocol",
-    //   value: "1"
-    // },
-    // {
-    //   title: "sdasd",
-    //   description: "dddddddddd",
-    //   value: "2"
-    // }
-  ];
+  addressSearch;
 
   componentDidMount() {}
 
@@ -69,14 +62,18 @@ class HomePage extends React.Component {
         </div>
         <div className="home-body">
           <AddressSearch
+            ref={addressSearch =>
+              (this.addressSearch = addressSearch)
+            }
             loading={this.props.addressesLoading}
             onSearch={this.onAdressSearch}
-            onResultSelect={this.onPointSelect}
-            options={this.addressOptions}
+            onResultSelect={this.onAdressSelect}
+            options={this.props.addressItems}
           />
           <YaMap
             ref={map => (this.map = map)}
-            onPointSelect={this.onPointSelect}
+            onPointSelect={this.onMapSelect}
+            mapPoint={this.props.mapPoint}
           />
         </div>
       </div>
@@ -85,18 +82,37 @@ class HomePage extends React.Component {
 
   onAdressSearch = queryString => {
     this.props.dispatch(addressesRequest(queryString));
-    //запрос на сервер яндекса -> получение addressOptions
   };
-  onPointSelect = geoObject => {
-    // тут будет полный GeoObject
-
-    console.log(geoObject);
-    //выставление в селект или карту -> запрос на сервер погоды
+  onAdressSelect = address => {
+    this.props.dispatch(geoCoderRequest(address));
+  };
+  onMapSelect = addressWithCoord => {
+    this.props.dispatch(geoCoderResponse(addressWithCoord));
+    this.addressSearch.setSearchValue(addressWithCoord.address);
+    this.props.dispatch(
+      weatherRequest(addressWithCoord.coordinates)
+    );
   };
 }
 
 const withConnect = connect(state => {
-  return state.get("home").toJS();
+  const home = state.get("home");
+  let addressItems = home.get("addressItems").map(item => {
+    const address = item.displayName.split(", ").reverse();
+    return {
+      key: item.displayName,
+      title: address[0],
+      description: address
+        .slice(1)
+        .reverse()
+        .join(", ")
+    };
+  });
+  return {
+    addressesLoading: home.get("addressesLoading"),
+    addressItems,
+    mapPoint: home.get("mapPoint")
+  };
 });
 const withSaga = injectSaga({ key: "homeSaga", saga });
 const withReducer = injectReducer({

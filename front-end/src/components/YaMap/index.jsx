@@ -25,23 +25,39 @@ export default class YaMap extends React.Component {
     );
     this.map.events.add("click", e => {
       var coords = e.get("coords");
-
-      // Если метка уже создана – просто передвигаем ее.
-      if (this.myPlacemark) {
-        this.myPlacemark.geometry.setCoordinates(coords);
-      } else {
-        // Если нет – создаем.
-        this.myPlacemark = this.createPlacemark(coords);
-        this.map.geoObjects.add(this.myPlacemark);
-        // Слушаем событие окончания перетаскивания на метке.
-        this.myPlacemark.events.add("dragend", () => {
-          this.getAddress(
-            this.myPlacemark.geometry.getCoordinates()
-          );
-        });
-      }
-      this.getAddress(coords);
+      this.setPlaceMarkPosition(coords);
     });
+    navigator.geolocation.getCurrentPosition(position => {
+      const coordinaties = [
+        position.coords.latitude,
+        position.coords.longitude
+      ];
+      this.setPlaceMarkPosition(coordinaties);
+      this.setMapCenter(coordinaties);
+    });
+  }
+
+  setPlaceMarkPosition(coords, address) {
+    if (this.myPlacemark) {
+      // Если метка уже создана – просто передвигаем ее.
+      this.myPlacemark.geometry.setCoordinates(coords);
+    } else {
+      // Если нет – создаем.
+      this.myPlacemark = this.createPlacemark(coords);
+      this.map.geoObjects.add(this.myPlacemark);
+      // Слушаем событие окончания перетаскивания на метке.
+      this.myPlacemark.events.add("dragend", () => {
+        this.getAddress(
+          this.myPlacemark.geometry.getCoordinates()
+        );
+      });
+    }
+    if (address) {
+      // выставление из слекта
+      this.setPlaceMarkAddress(address);
+    } else {
+      this.getAddress(coords);
+    }
   }
 
   createPlacemark(coords) {
@@ -60,35 +76,50 @@ export default class YaMap extends React.Component {
 
   getAddress(coords) {
     // Определяем адрес по координатам (обратное геокодирование).
-
     this.myPlacemark.properties.set("iconCaption", "поиск...");
     ymaps.geocode(coords).then(res => {
-      var firstGeoObject = res.geoObjects.get(0);
-      // кидаем событие выбора точки
-      this.props.onPointSelect(
-        firstGeoObject.geometry.getCoordinates()
-      );
+      var firstGeoObject = res.geoObjects.get(0),
+        pointAddress = firstGeoObject.getAddressLine();
 
-      this.myPlacemark.properties.set({
-        // Формируем строку с данными об объекте.
-        iconCaption: [
-          // Название населенного пункта или вышестоящее административно-территориальное образование.
-          firstGeoObject.getLocalities().length
-            ? firstGeoObject.getLocalities()
-            : firstGeoObject.getAdministrativeAreas(),
-          // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
-          firstGeoObject.getThoroughfare() ||
-            firstGeoObject.getPremise()
-        ]
-          .filter(Boolean)
-          .join(", "),
-        // В качестве контента балуна задаем строку с адресом объекта.
-        balloonContent: firstGeoObject.getAddressLine()
+      // кидаем событие выбора точки
+      this.innerMapPointAddress = pointAddress;
+      this.props.onPointSelect({
+        address: pointAddress,
+        coordinates: firstGeoObject.geometry.getCoordinates()
       });
+      this.setPlaceMarkAddress(pointAddress);
     });
   }
 
+  setPlaceMarkAddress(address) {
+    this.myPlacemark.properties.set({
+      iconCaption: address,
+      balloonContent: address
+    });
+  }
+  setMapCenter(coordinates) {
+    this.map.setCenter(coordinates, this.map.getZoom(), {
+      checkZoomRange: true,
+      duration: 400
+    });
+  }
+
+  innerMapPointAddress;
   render() {
+    if (this.props.mapPoint) {
+      const selectOutside =
+        this.props.mapPoint.address != this.innerMapPointAddress;
+
+      if (selectOutside) {
+        // new mapPoint select from search
+        this.setPlaceMarkPosition(
+          this.props.mapPoint.coordinates,
+          this.props.mapPoint.address
+        );
+        this.setMapCenter(this.props.mapPoint.coordinates);
+      }
+      this.prevMapPointAddress = this.props.mapPoint.address;
+    }
     return <div id="map" className="map-container" />;
   }
 }
