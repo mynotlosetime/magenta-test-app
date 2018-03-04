@@ -5,3 +5,22 @@
     at rejected (C:\dev\magenta-test-app\src\services\weather.service.ts:14:65)
     at <anonymous>
     at process._tickCallback (internal/process/next_tick.js:188:7)
+[2018-03-04 20:09:06] errors.ERROR: {"response":"No Access","status":403,"logger":{"context":"HttpException","isTimeDiffEnabled":false}}
+[2018-03-04 20:09:16] errors.ERROR: Error: Weather api response error
+    at WeatherService.<anonymous> (C:\dev\magenta-test-app\src\services\weather.service.ts:23:13)
+    at Generator.throw (<anonymous>)
+    at rejected (C:\dev\magenta-test-app\src\services\weather.service.ts:14:65)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)
+[2018-03-04 20:10:21] errors.ERROR: Error: Weather api response error
+    at WeatherService.<anonymous> (C:\dev\magenta-test-app\src\services\weather.service.ts:23:13)
+    at Generator.throw (<anonymous>)
+    at rejected (C:\dev\magenta-test-app\src\services\weather.service.ts:14:65)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)
+[2018-03-04 20:12:32] errors.ERROR: Error: Weather api response error
+    at WeatherService.<anonymous> (C:\dev\magenta-test-app\src\services\weather.service.ts:23:13)
+    at Generator.throw (<anonymous>)
+    at rejected (C:\dev\magenta-test-app\src\services\weather.service.ts:14:65)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)

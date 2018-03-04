@@ -10,9 +10,7 @@ async function bootstrap() {
   app.useGlobalGuards(new RolesGuard());
   app.use(bodyParser.json());
   app.use(cookieParser());
-
-  var myapp: any = app;
-  app.useGlobalFilters(myapp.get(AnyExceptionFilter));
+  app.useGlobalFilters(app["get"](AnyExceptionFilter));
 
   await app.listen(3000);
 }

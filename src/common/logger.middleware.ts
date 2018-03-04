@@ -13,10 +13,10 @@ export class LoggerMiddleware implements NestMiddleware {
     return (req, res, next) => {
       if (req.session.user) {
         this.usersLogger.info(`
-           user: ${req.session.user.email},
-           method: ${req.method},
-           url: ${req.originalUrl},
-           sessionId: ${req.sessionID}
+          user: ${req.session.user.email},
+          method: ${req.method},
+          url: ${req.originalUrl},
+          sessionId: ${req.sessionID}
         `);
       }
       next();
