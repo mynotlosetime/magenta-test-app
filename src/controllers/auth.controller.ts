@@ -26,8 +26,8 @@ export class AuthController {
         req.session.user = user;
       }
       this.usersLogger.info(`
-        user: ${req.session.user.email},
-        action: Auth
+          user: ${req.session.user.email},
+          action: Auth
       `);
       return [user];
     } else {
@@ -37,8 +37,8 @@ export class AuthController {
   @Post("logout")
   async logout(@Req() req) {
     this.usersLogger.info(`
-      user: ${req.session.user.email},
-      action: Logout
+          user: ${req.session.user.email},
+          action: Logout
     `);
     req.session.destroy();
     return true;

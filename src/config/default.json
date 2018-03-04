@@ -9,7 +9,7 @@
     }
   },
   "weather": {
-    "basePath": "http://openweathermap.org/data/2.5/weather?",
+    "basePath": "http://api.openweathermap.org/data/2.5/weather?",
     "apiKey": "b5d2fe1f08efbc1e20e2d905625fb8af"
   }
 }

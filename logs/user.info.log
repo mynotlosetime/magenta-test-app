@@ -42,3 +42,67 @@
           url: /weather?latitude=53.529749&longitude=49.430769,
           sessionId: fwzfxrN4Yuh4f6V4On8ziKyJC71F9NGA
         
+[2018-03-04 20:14:45] userInfo.INFO: 
+          user: re@re.re,
+          method: GET,
+          url: /auth/signal,
+          sessionId: fwzfxrN4Yuh4f6V4On8ziKyJC71F9NGA
+        
+[2018-03-04 20:14:47] userInfo.INFO: 
+          user: re@re.re,
+          method: GET,
+          url: /weather?latitude=53.22074&longitude=50.198586,
+          sessionId: fwzfxrN4Yuh4f6V4On8ziKyJC71F9NGA
+        
+[2018-03-04 20:17:25] userInfo.INFO: 
+          user: re@re.re,
+          method: POST,
+          url: /auth/logout,
+          sessionId: fwzfxrN4Yuh4f6V4On8ziKyJC71F9NGA
+        
+[2018-03-04 20:17:25] userInfo.INFO: 
+        user: re@re.re,
+        action: Logout
+    
+[2018-03-04 20:17:26] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 20:17:27] userInfo.INFO: 
+          user: re@re.re,
+          method: GET,
+          url: /auth/signal,
+          sessionId: Q0gjRedJ4GjQ4lrlhT_FTE28Jvnt-8le
+        
+[2018-03-04 20:18:03] userInfo.INFO: 
+          user: re@re.re,
+          method: GET,
+          url: /auth/signal,
+          sessionId: Q0gjRedJ4GjQ4lrlhT_FTE28Jvnt-8le
+        
+[2018-03-04 20:18:05] userInfo.INFO: 
+          user: re@re.re,
+          method: GET,
+          url: /weather?latitude=53.529749&longitude=49.430769,
+          sessionId: Q0gjRedJ4GjQ4lrlhT_FTE28Jvnt-8le
+        
+[2018-03-04 20:18:06] userInfo.INFO: 
+          user: re@re.re,
+          method: POST,
+          url: /auth/logout,
+          sessionId: Q0gjRedJ4GjQ4lrlhT_FTE28Jvnt-8le
+        
+[2018-03-04 20:18:06] userInfo.INFO: 
+          user: re@re.re,
+          action: Logout
+    
+[2018-03-04 20:18:07] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 20:18:07] userInfo.INFO: 
+          user: re@re.re,
+          method: GET,
+          url: /auth/signal,
+          sessionId: pi9CU9cgqj4q_PQzgbD4CfopbcdaMnAS
+        
