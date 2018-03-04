@@ -1,13 +1,15 @@
 import { Controller, Get, Query } from "@nestjs/common";
+import { WeatherService } from "../services/weather.service";
 
 @Controller("weather")
 export class WeatherController {
-  constructor() {}
+  constructor(private readonly weatherService: WeatherService) {}
 
   @Get()
   async getWeather(@Query() query) {
-    console.log(query.latitude, query.longitude);
-    //идем на weather api
-    return true;
+    return await this.weatherService.getWeather(
+      query.latitude,
+      query.longitude
+    );
   }
 }

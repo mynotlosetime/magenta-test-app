@@ -1,0 +1,7 @@
+[2018-03-04 19:56:11] errors.ERROR: {"response":"No Access","status":403,"logger":{"context":"HttpException","isTimeDiffEnabled":false}}
+[2018-03-04 19:56:35] errors.ERROR: Error: Weather api response error
+    at WeatherService.<anonymous> (C:\dev\magenta-test-app\src\services\weather.service.ts:23:13)
+    at Generator.throw (<anonymous>)
+    at rejected (C:\dev\magenta-test-app\src\services\weather.service.ts:14:65)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)

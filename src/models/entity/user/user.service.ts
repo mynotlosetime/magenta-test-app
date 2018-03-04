@@ -12,8 +12,7 @@ export class UserService {
   constructor(
     @Inject("UsersRepository")
     private readonly usersRepository: typeof Model,
-    @Inject("ProfilesRepository")
-    private readonly profilesRepository: typeof Model
+    @Inject("UsersLogger") private readonly usersLogger
   ) {}
 
   static async createTestData(): Promise<User> {
@@ -26,7 +25,8 @@ export class UserService {
           firstName: "Bob",
           lastName: "Alice"
         }
-      },{
+      },
+      {
         include: [Profile]
       }
     );
@@ -40,7 +40,7 @@ export class UserService {
     });
 
     if (user) {
-      const isValidPassword = user.checkPassword(
+      const isValidPassword: boolean = user.checkPassword(
         loginData.password
       );
       if (isValidPassword) {

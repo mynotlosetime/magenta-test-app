@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Req } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Req,
+  Inject
+} from "@nestjs/common";
 import { UserService } from "../models/entity/user/user.service";
 import config from "../config";
 import { ForbiddenException } from "../common/exceptions/forbidden.exceprion";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly usersService: UserService) {}
+  constructor(
+    @Inject("UsersLogger") private readonly usersLogger,
+    private readonly usersService: UserService
+  ) {}
 
   @Post("login")
   async login(@Body() loginData: any, @Req() req) {
@@ -15,6 +25,10 @@ export class AuthController {
       if (!req.session.user) {
         req.session.user = user;
       }
+      this.usersLogger.info(`
+          user: ${req.session.user.email},
+          action: Auth
+      `);
       return [user];
     } else {
       throw new ForbiddenException("Incorrect login data");
@@ -22,6 +36,10 @@ export class AuthController {
   }
   @Post("logout")
   async logout(@Req() req) {
+    this.usersLogger.info(`
+        user: ${req.session.user.email},
+        action: Logout
+    `);
     req.session.destroy();
     return true;
   }

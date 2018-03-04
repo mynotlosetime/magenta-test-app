@@ -7,5 +7,9 @@
       "httpOnly": true,
       "maxAge": null
     }
+  },
+  "weather": {
+    "basePath": "http:hermap.org/data/2.5/weather?",
+    "apiKey": "b5d2fe1f08efbc1e20e2d905625fb8af"
   }
 }

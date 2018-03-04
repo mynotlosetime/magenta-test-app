@@ -13,8 +13,7 @@ import { Sequelize } from "sequelize";
 @Middleware()
 export class SessionMiddleware implements NestMiddleware {
   constructor(
-    @Inject("SequelizeToken")
-    private readonly sequelize: Sequelize
+    @Inject("SequelizeToken") private readonly sequelize: Sequelize
   ) {}
   resolve(...args: any[]): ExpressMiddleware {
     const SequelizeStore = store(session.Store);

@@ -1,0 +1,370 @@
+[2018-03-04 18:54:01] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: s7CgoBvrYHU6Wijif9L11osfe3tXGcon
+        
+[2018-03-04 18:54:01] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth,
+          success: true
+      
+[2018-03-04 18:54:02] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:54:45] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/login,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:54:45] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth,
+          success: true
+      
+[2018-03-04 18:54:46] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:54:46] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:56:07] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/login,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:56:07] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 18:56:18] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/login,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:56:18] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 18:56:18] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:56:19] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.22074&longitude=50.198586,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:56:27] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: MlGncKpdVloB5qDjFh74pSzySCFv7JU0
+        
+[2018-03-04 18:57:04] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 18:57:05] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: 2SNQ-meoFpskCY0uGdiIcJ9QGM1Vm-Ob
+        
+[2018-03-04 18:57:06] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: 2SNQ-meoFpskCY0uGdiIcJ9QGM1Vm-Ob
+        
+[2018-03-04 18:57:07] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: 2SNQ-meoFpskCY0uGdiIcJ9QGM1Vm-Ob
+        
+[2018-03-04 18:57:07] userInfo.INFO: 
+        user: re@re.re,
+        action: Logout
+    
+[2018-03-04 18:59:09] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 18:59:10] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: D3oA5ZWIb_TmAtd0sTF6QHVwKKxc5C-Q
+        
+[2018-03-04 18:59:15] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: D3oA5ZWIb_TmAtd0sTF6QHVwKKxc5C-Q
+        
+[2018-03-04 18:59:17] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: D3oA5ZWIb_TmAtd0sTF6QHVwKKxc5C-Q
+        
+[2018-03-04 19:16:47] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: D3oA5ZWIb_TmAtd0sTF6QHVwKKxc5C-Q
+        
+[2018-03-04 19:16:47] userInfo.INFO: 
+        user: re@re.re,
+        action: Logout
+    
+[2018-03-04 19:16:49] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 19:16:49] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: Kqy3MQb18_GpnBn7oIC1Grs75aAGH7u8
+        
+[2018-03-04 19:16:52] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: Kqy3MQb18_GpnBn7oIC1Grs75aAGH7u8
+        
+[2018-03-04 19:16:54] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: Kqy3MQb18_GpnBn7oIC1Grs75aAGH7u8
+        
+[2018-03-04 19:16:56] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.249564&longitude=49.482359,
+           sessionId: Kqy3MQb18_GpnBn7oIC1Grs75aAGH7u8
+        
+[2018-03-04 19:17:24] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: Kqy3MQb18_GpnBn7oIC1Grs75aAGH7u8
+        
+[2018-03-04 19:17:24] userInfo.INFO: 
+        user: re@re.re,
+        action: Logout
+    
+[2018-03-04 19:18:34] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 19:18:34] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: gfnQ9QQzJG7jNMcxCw6WyqeXHZYFMX9Y
+        
+[2018-03-04 19:18:35] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: gfnQ9QQzJG7jNMcxCw6WyqeXHZYFMX9Y
+        
+[2018-03-04 19:18:42] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: gfnQ9QQzJG7jNMcxCw6WyqeXHZYFMX9Y
+        
+[2018-03-04 19:18:42] userInfo.INFO: 
+        user: re@re.re,
+        action: Logout
+    
+[2018-03-04 19:31:13] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 19:31:13] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:31:15] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.22074&longitude=50.198586,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:35:29] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:35:31] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.22074&longitude=50.198586,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:39:45] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/login,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:39:45] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 19:39:45] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:39:46] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.22074&longitude=50.198586,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:43:18] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:43:21] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:43:35] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: Vs2pXiuVa418s83T1L4zjDuF-LaZnvAF
+        
+[2018-03-04 19:43:35] userInfo.INFO: 
+        user: re@re.re,
+        action: Logout
+    
+[2018-03-04 19:47:24] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 19:47:24] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: ZOI1IGNEy8X7LSn49asVvGXhY8XyKdF8
+        
+[2018-03-04 19:47:32] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: ZOI1IGNEy8X7LSn49asVvGXhY8XyKdF8
+        
+[2018-03-04 19:47:34] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: ZOI1IGNEy8X7LSn49asVvGXhY8XyKdF8
+        
+[2018-03-04 19:47:43] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: ZOI1IGNEy8X7LSn49asVvGXhY8XyKdF8
+        
+[2018-03-04 19:47:43] userInfo.INFO: 
+        user: re@re.re,
+        action: Logout
+    
+[2018-03-04 19:51:11] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 19:51:11] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: DWFcKMBsh2FXPGE_1Yw1MImqAobZQbQK
+        
+[2018-03-04 19:51:15] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: DWFcKMBsh2FXPGE_1Yw1MImqAobZQbQK
+        
+[2018-03-04 19:51:17] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: DWFcKMBsh2FXPGE_1Yw1MImqAobZQbQK
+        
+[2018-03-04 19:52:04] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: DWFcKMBsh2FXPGE_1Yw1MImqAobZQbQK
+        
+[2018-03-04 19:52:06] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: DWFcKMBsh2FXPGE_1Yw1MImqAobZQbQK
+        
+[2018-03-04 19:52:19] userInfo.INFO: 
+           user: re@re.re,
+           method: POST,
+           url: /auth/logout,
+           sessionId: DWFcKMBsh2FXPGE_1Yw1MImqAobZQbQK
+        
+[2018-03-04 19:52:19] userInfo.INFO: 
+        user: re@re.re,
+        action: Logout
+    
+[2018-03-04 19:56:21] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-04 19:56:21] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: 4AHsLt5SEdW3EX7NawvCsDAmJjqdn7iL
+        
+[2018-03-04 19:56:33] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /auth/signal,
+           sessionId: 4AHsLt5SEdW3EX7NawvCsDAmJjqdn7iL
+        
+[2018-03-04 19:56:34] userInfo.INFO: 
+           user: re@re.re,
+           method: GET,
+           url: /weather?latitude=53.529749&longitude=49.430769,
+           sessionId: 4AHsLt5SEdW3EX7NawvCsDAmJjqdn7iL
+        
