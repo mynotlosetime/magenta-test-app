@@ -10,7 +10,9 @@ export default class YaMap extends React.Component {
   componentDidMount() {
     ymaps.ready(this.initMap.bind(this));
   }
-
+  componentWillUnmount() {
+    this.map.destroy();
+  }
   initMap() {
     this.map = new ymaps.Map(
       "map",
@@ -47,9 +49,7 @@ export default class YaMap extends React.Component {
       this.map.geoObjects.add(this.myPlacemark);
       // Слушаем событие окончания перетаскивания на метке.
       this.myPlacemark.events.add("dragend", () => {
-        this.getAddress(
-          this.myPlacemark.geometry.getCoordinates()
-        );
+        this.getAddress(this.myPlacemark.geometry.getCoordinates());
       });
     }
     if (address) {
@@ -105,11 +105,12 @@ export default class YaMap extends React.Component {
 
   innerMapPointAddress;
   render() {
-    if (this.props.mapPoint) {
+    if (this.props.mapPoint && this.map) {
       const selectOutside =
         this.props.mapPoint.address != this.innerMapPointAddress;
 
       if (selectOutside) {
+        console.log("set center");
         // выбор был сделан из внешнего источника ( селект )
         this.setPlaceMarkPosition(
           this.props.mapPoint.coordinates,

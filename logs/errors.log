@@ -24,3 +24,4 @@
     at rejected (C:\dev\magenta-test-app\src\services\weather.service.ts:14:65)
     at <anonymous>
     at process._tickCallback (internal/process/next_tick.js:188:7)
+[2018-03-04 22:19:31] errors.ERROR: {"response":"No Access","status":403,"logger":{"context":"HttpException","isTimeDiffEnabled":false}}
