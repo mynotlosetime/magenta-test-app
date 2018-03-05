@@ -18,6 +18,7 @@ export default class AddressSearch extends React.Component {
           onResultSelect={this.handleResultSelect}
           onSearchChange={this.handleSearchChange}
           results={this.props.options}
+          value={this.props.address}
           ref={search => (this.search = search)}
         />
       </div>

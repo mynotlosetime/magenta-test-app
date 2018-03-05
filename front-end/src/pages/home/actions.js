@@ -2,6 +2,8 @@ export const ADDRESSES_REQUEST = "pages/home/ADDRESSES_REQUEST",
   ADDRESSES_RESPONSE = "pages/home/ADDRESSES_RESPONSE",
   addressesRequest = query => {
     //запрос на сервер яндекса -> получение адресов по строке
+
+    console.log(query);
     return {
       type: ADDRESSES_REQUEST,
       query
@@ -15,17 +17,17 @@ export const ADDRESSES_REQUEST = "pages/home/ADDRESSES_REQUEST",
   },
   GEOCODER_REQUEST = "pages/home/GEOCODER_REQUEST",
   GEOCODER_RESPONSE = "pages/home/GEOCODER_RESPONSE",
-  geoCoderRequest = selectedAddress => {
+  geoCoderRequest = addressOrCoordinates => {
     //запрос на геокодер яндекса -> получение координат по строке
     return {
       type: GEOCODER_REQUEST,
-      selectedAddress
+      query: addressOrCoordinates
     };
   },
-  geoCoderResponse = addressWithCoord => {
+  geoCoderResponse = mapPoint => {
     return {
       type: GEOCODER_RESPONSE,
-      addressWithCoord
+      mapPoint
     };
   },
   WEATHER_REQUEST = "pages/home/WEATHER_REQUEST",

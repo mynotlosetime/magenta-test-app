@@ -50,13 +50,15 @@ class HomePage extends React.Component {
   logout = () => {
     this.props.dispatch(logoutRequest());
   };
-
   render() {
     return (
       <div className="home-layout">
         <div className="side-panel">
           <AddressSearch
-            ref={addressSearch => (this.addressSearch = addressSearch)}
+            ref={addressSearch =>
+              (this.addressSearch = addressSearch)
+            }
+            address={this.props.mapPoint.address}
             loading={this.props.addresses.loading}
             onSearch={this.onAdressSearch}
             onResultSelect={this.onAdressSelect}
@@ -66,7 +68,7 @@ class HomePage extends React.Component {
         </div>
         <YaMap
           ref={map => (this.map = map)}
-          onPointSelect={this.onMapSelect}
+          onGetAddressRequest={this.onMapPointSelect}
           mapPoint={this.props.mapPoint}
         />
         <div className="logout-btn" onClick={this.logout}>
@@ -83,11 +85,15 @@ class HomePage extends React.Component {
   onAdressSelect = address => {
     this.props.dispatch(geoCoderRequest(address));
   };
-  onMapSelect = addressWithCoord => {
-    this.props.dispatch(geoCoderResponse(addressWithCoord));
-    this.addressSearch.setSearchValue(addressWithCoord.address);
-    this.props.dispatch(weatherRequest(addressWithCoord.coordinates));
+  onMapPointSelect = coordinates => {
+    this.props.dispatch(geoCoderRequest(coordinates));
   };
+
+  // onGeocoderResponse = coordinates => {
+
+  //   this.addressSearch.setSearchValue(addressWithCoord.address);
+  //   this.props.dispatch(weatherRequest(addressWithCoord.coordinates));
+  // };
 }
 
 const withConnect = connect(state => {
@@ -95,7 +101,7 @@ const withConnect = connect(state => {
   return {
     weather: home.get("weather").toJS(),
     addresses: home.get("addresses").toJS(),
-    mapPoint: home.get("mapPoint")
+    mapPoint: home.get("mapPoint").toJS()
   };
 });
 const withSaga = injectSaga({ key: "homeSaga", saga });

@@ -17,13 +17,19 @@ const initialState = fromJS({
     loading: false,
     item: null
   },
-  mapPoint: null
+  mapPoint: {
+    address: null,
+    coordinates: null,
+    isReverseGeocoding: true
+  }
 });
 
 export default function home(state = initialState, action) {
   switch (action.type) {
     case ADDRESSES_REQUEST:
-      return state.setIn(["addresses", "loading"], true);
+      return state
+        .setIn(["addresses", "loading"], true)
+        .setIn(["mapPoint", "addresses"], action.query);
     case ADDRESSES_RESPONSE:
       return state.set(
         "addresses",
@@ -35,7 +41,7 @@ export default function home(state = initialState, action) {
     case GEOCODER_REQUEST:
       return state.setIn(["weather", "loading"], true);
     case GEOCODER_RESPONSE:
-      return state.set("mapPoint", action.addressWithCoord);
+      return state.set("mapPoint", Map(action.mapPoint));
     case WEATHER_RESPONSE:
       return state.setIn(["weather", "loading"], false);
     default:

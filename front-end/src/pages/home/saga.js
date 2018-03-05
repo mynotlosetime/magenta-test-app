@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import { push } from "react-router-redux";
 
-export function* fetchAddressesYandex(action) {
+export function* suggestYandex(action) {
   const items = yield ymaps.suggest(action.query);
   yield put(addressesResponse(items));
 }
@@ -19,23 +19,28 @@ export function* fetchAddressesYandex(action) {
 const geoCoderQuery =
   "https://geocode-maps.yandex.ru/1.x/?format=json&geocode=";
 export function* geoCoderYandex(action) {
-  const response = yield call(
-    axios.get,
-    geoCoderQuery + action.selectedAddress
-  );
-  const geoObject =
-      response.data.response.GeoObjectCollection.featureMember[0].GeoObject,
-    coordinates = geoObject.Point.pos
-      .split(" ")
-      .reverse()
-      .map(c => +c);
-  yield put(
-    geoCoderResponse({
-      address: geoObject.name,
-      coordinates
-    })
-  );
-  yield put(weatherRequest(coordinates));
+  const res = yield ymaps.geocode(action.query),
+    isReverseGeocoding = Array.isArray(action.query);
+
+  let firstGeoObject = res.geoObjects.get(0);
+  const address = firstGeoObject.getAddressLine();
+  if (address) {
+    let coordinates;
+
+    if (isReverseGeocoding) {
+      coordinates = action.query;
+    } else {
+      coordinates = firstGeoObject.geometry.getCoordinates();
+    }
+    yield put(
+      geoCoderResponse({
+        address,
+        coordinates,
+        isReverseGeocoding
+      })
+    );
+    yield put(weatherRequest(coordinates));
+  }
 }
 
 export function* getWeather(action) {
@@ -52,7 +57,7 @@ export function* getWeather(action) {
  * Root saga manages watcher lifecycle
  */
 export default function* homeSaga() {
-  yield takeLatest(ADDRESSES_REQUEST, fetchAddressesYandex);
+  yield takeLatest(ADDRESSES_REQUEST, suggestYandex);
   yield takeLatest(GEOCODER_REQUEST, geoCoderYandex);
   yield takeLatest(WEATHER_REQUEST, getWeather);
 }
