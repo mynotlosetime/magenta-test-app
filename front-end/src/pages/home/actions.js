@@ -36,4 +36,10 @@ export const ADDRESSES_REQUEST = "pages/home/ADDRESSES_REQUEST",
       type: WEATHER_REQUEST,
       coordinates
     };
+  },
+  weatherResponse = item => {
+    return {
+      type: WEATHER_RESPONSE,
+      item
+    };
   };

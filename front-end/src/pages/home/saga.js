@@ -1,16 +1,12 @@
-import {
-  call,
-  put,
-  select,
-  takeLatest
-} from "redux-saga/effects";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import {
   ADDRESSES_REQUEST,
   GEOCODER_REQUEST,
   addressesResponse,
   geoCoderResponse,
   WEATHER_REQUEST,
-  weatherRequest
+  weatherRequest,
+  weatherResponse
 } from "./actions";
 import axios from "axios";
 import { push } from "react-router-redux";
@@ -28,8 +24,7 @@ export function* geoCoderYandex(action) {
     geoCoderQuery + action.selectedAddress
   );
   const geoObject =
-      response.data.response.GeoObjectCollection.featureMember[0]
-        .GeoObject,
+      response.data.response.GeoObjectCollection.featureMember[0].GeoObject,
     coordinates = geoObject.Point.pos
       .split(" ")
       .reverse()
@@ -50,8 +45,7 @@ export function* getWeather(action) {
       longitude: action.coordinates[1]
     }
   });
-
-  console.log("response: ", response);
+  yield put(weatherResponse(response.data));
 }
 
 /**

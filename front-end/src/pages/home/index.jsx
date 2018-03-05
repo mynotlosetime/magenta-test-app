@@ -28,6 +28,7 @@ import { compose } from "redux";
 import { logoutRequest } from "../../common/global.actions";
 import YaMap from "../../components/YaMap";
 import AddressSearch from "../../components/AddressSearch";
+import WeatherView from "../../components/WeatherView";
 import {
   addressesRequest,
   geoCoderRequest,
@@ -53,28 +54,24 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="home-layout">
-        <div>
-          <Menu pointing secondary>
-            <Menu.Menu position="right">
-              <Menu.Item name="Выход" onClick={this.logout} />
-            </Menu.Menu>
-          </Menu>
-        </div>
-        <div className="home-body">
+        <div className="side-panel">
           <AddressSearch
-            ref={addressSearch =>
-              (this.addressSearch = addressSearch)
-            }
-            loading={this.props.addressesLoading}
+            ref={addressSearch => (this.addressSearch = addressSearch)}
+            loading={this.props.addresses.loading}
             onSearch={this.onAdressSearch}
             onResultSelect={this.onAdressSelect}
-            options={this.props.addressItems}
+            options={this.props.addresses.items}
           />
-          <YaMap
-            ref={map => (this.map = map)}
-            onPointSelect={this.onMapSelect}
-            mapPoint={this.props.mapPoint}
-          />
+          <WeatherView loading={this.props.weather.loading} />
+        </div>
+        <YaMap
+          ref={map => (this.map = map)}
+          onPointSelect={this.onMapSelect}
+          mapPoint={this.props.mapPoint}
+        />
+        <div className="logout-btn" onClick={this.logout}>
+          <span>Выход</span>
+          <i className="sign out alternate icon" />
         </div>
       </div>
     );
@@ -89,28 +86,15 @@ class HomePage extends React.Component {
   onMapSelect = addressWithCoord => {
     this.props.dispatch(geoCoderResponse(addressWithCoord));
     this.addressSearch.setSearchValue(addressWithCoord.address);
-    this.props.dispatch(
-      weatherRequest(addressWithCoord.coordinates)
-    );
+    this.props.dispatch(weatherRequest(addressWithCoord.coordinates));
   };
 }
 
 const withConnect = connect(state => {
   const home = state.get("home");
-  let addressItems = home.get("addressItems").map(item => {
-    const address = item.displayName.split(", ").reverse();
-    return {
-      key: item.displayName,
-      title: address[0],
-      description: address
-        .slice(1)
-        .reverse()
-        .join(", ")
-    };
-  });
   return {
-    addressesLoading: home.get("addressesLoading"),
-    addressItems,
+    weather: home.get("weather").toJS(),
+    addresses: home.get("addresses").toJS(),
     mapPoint: home.get("mapPoint")
   };
 });
@@ -119,6 +103,4 @@ const withReducer = injectReducer({
   key: "home",
   reducer
 });
-export default compose(withReducer, withSaga, withConnect)(
-  HomePage
-);
+export default compose(withReducer, withSaga, withConnect)(HomePage);

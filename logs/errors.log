@@ -25,3 +25,13 @@
     at <anonymous>
     at process._tickCallback (internal/process/next_tick.js:188:7)
 [2018-03-04 22:19:31] errors.ERROR: {"response":"No Access","status":403,"logger":{"context":"HttpException","isTimeDiffEnabled":false}}
+[2018-03-05 12:04:03] errors.ERROR: TypeError: Cannot read property 'email' of undefined
+    at AuthController.<anonymous> (E:\dev\magenta-test-app\src\controllers\auth.controller.ts:40:35)
+    at next (native)
+    at E:\dev\magenta-test-app\src\controllers\auth.controller.ts:19:71
+    at __awaiter (E:\dev\magenta-test-app\src\controllers\auth.controller.ts:15:12)
+    at AuthController.logout (E:\dev\magenta-test-app\src\controllers\auth.controller.ts:51:16)
+    at RouterExecutionContext.<anonymous> (E:\dev\magenta-test-app\node_modules\@nestjs\core\router\router-execution-context.js:52:33)
+    at next (native)
+    at fulfilled (E:\dev\magenta-test-app\node_modules\@nestjs\core\router\router-execution-context.js:4:58)
+[2018-03-05 17:30:45] errors.ERROR: {"response":"Incorrect login data","status":403,"logger":{"context":"HttpException","isTimeDiffEnabled":false}}

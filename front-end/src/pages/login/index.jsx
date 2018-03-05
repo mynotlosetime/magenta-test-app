@@ -15,7 +15,7 @@ import reducer from "./reducer";
 import saga from "./saga";
 import injectReducer from "../../../utils/injectReducer";
 import injectSaga from "../../../utils/injectSaga";
-
+import "./styles.less";
 import { tryLogin } from "./actions";
 
 class LoginPage extends React.Component {
@@ -24,8 +24,9 @@ class LoginPage extends React.Component {
       <div className="login-layout">
         <Segment padded="very">
           <h2 className="ui teal image header">
-            <div onClick={this.signal} className="content">
-              Погода на карте
+            <div className="content">
+              <div className="app-logo" />
+              <span>Погода</span>
             </div>
           </h2>
           <LoginForm

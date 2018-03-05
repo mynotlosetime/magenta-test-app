@@ -13,6 +13,7 @@ export default class AddressSearch extends React.Component {
     return (
       <div className="address-search">
         <Search
+          fluid
           loading={this.props.loading}
           onResultSelect={this.handleResultSelect}
           onSearchChange={this.handleSearchChange}
