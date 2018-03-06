@@ -50,6 +50,7 @@ class HomePage extends React.Component {
   logout = () => {
     this.props.dispatch(logoutRequest());
   };
+
   render() {
     return (
       <div className="home-layout">

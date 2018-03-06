@@ -18,7 +18,7 @@ const initialState = fromJS({
     item: null
   },
   mapPoint: {
-    address: null,
+    address: "",
     coordinates: null,
     isReverseGeocoding: true
   }

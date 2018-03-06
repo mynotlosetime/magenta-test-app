@@ -9,6 +9,14 @@ export default class AddressSearch extends React.Component {
 
   componentDidMount() {}
 
+  componentWillReceiveProps() {
+    if (this.props.address != this.prevAddress) {
+      this.setSearchValue(this.props.address);
+    }
+    this.prevAddress = this.props.address;
+  }
+
+  prevAddress;
   render() {
     return (
       <div className="address-search">
@@ -18,7 +26,6 @@ export default class AddressSearch extends React.Component {
           onResultSelect={this.handleResultSelect}
           onSearchChange={this.handleSearchChange}
           results={this.props.options}
-          value={this.props.address}
           ref={search => (this.search = search)}
         />
       </div>
