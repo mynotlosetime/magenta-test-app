@@ -17,8 +17,10 @@ class GuardRoute extends React.Component {
           } else {
             this.canActivate();
             return (
-              <Dimmer active>
-                <Loader size="big">Загрузка</Loader>
+              <Dimmer inverted active>
+                <Loader inverted size="big">
+                  Загрузка
+                </Loader>
               </Dimmer>
             );
           }

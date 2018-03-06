@@ -29,14 +29,14 @@ export default class YaMap extends React.Component {
       var coords = e.get("coords");
       this.onMapClick(coords);
     });
-    // navigator.geolocation.getCurrentPosition(position => {
-    //   const coordinaties = [
-    //     position.coords.latitude,
-    //     position.coords.longitude
-    //   ];
-    //   this.setPlaceMarkPosition(coordinaties);
-    //   this.setMapCenter(coordinaties);
-    // });
+    navigator.geolocation.getCurrentPosition(position => {
+      const coordinates = [
+        position.coords.latitude,
+        position.coords.longitude
+      ];
+      this.onMapClick(coordinates);
+      this.setMapCenter(coordinates);
+    });
   }
 
   onMapClick = coordinates => {
@@ -69,8 +69,8 @@ export default class YaMap extends React.Component {
 
   setMapCenter(coordinates) {
     this.map.setCenter(coordinates, this.map.getZoom(), {
-      checkZoomRange: true,
-      duration: 400
+      checkZoomRange: true
+      // duration: 400
     });
   }
 
@@ -104,9 +104,9 @@ export default class YaMap extends React.Component {
   }
 
   render() {
-    if (this.props.mapPoint.address && this.map) {
-      // определяем с карты ли был отправлен запрос на адрес
+    if (this.props.mapPoint && this.map) {
       const coordinates = this.props.mapPoint.coordinates;
+      // определяем с карты ли был отправлен запрос на адрес
       if (!this.props.mapPoint.isReverseGeocoding) {
         this.setMapCenter(coordinates);
       }

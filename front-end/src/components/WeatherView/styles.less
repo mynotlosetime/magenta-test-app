@@ -1,7 +1,75 @@
 .weather-view {
   background: #fff;
-  height: 291px;
+  height: 245px;
   border-radius: 4px;
   position: relative;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  .weather-layout {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    .details-block {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+
+      & > div {
+        flex: 1;
+        .title {
+          color: #585858;
+        }
+        .value {
+          font-size: 18px;
+          font-weight: 600;
+        }
+        .data {
+          display: flex;
+          margin-top: 10px;
+          & div:last-child {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+    .main-block {
+      border-bottom: 1px solid #e6e6e6;
+      padding-bottom: 32px;
+      .main-details {
+        margin-left: 15px;
+        .temp {
+          font-size: 28px;
+          font-weight: 500;
+        }
+        .type {
+          color: #585858;
+          font-size: 16px;
+          font-weight: 600;
+          margin-top: 10px;
+        }
+      }
+      .icon-block {
+        margin-top: 15px;
+        display: flex;
+        .main-icon {
+          display: block;
+          width: 58px;
+          height: 58px;
+          background-size: contain;
+
+          &.rain {
+            background: url("./assets/rainy.png") no-repeat;
+          }
+          &.clouds {
+            background: url("./assets/clouds.png") no-repeat;
+          }
+          &.clear {
+            background: url("./assets/sunny.png") no-repeat;
+          }
+          &.snow {
+            background: url("./assets/snow.png") no-repeat;
+          }
+        }
+      }
+    }
+  }
 }

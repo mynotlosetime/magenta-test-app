@@ -24,29 +24,27 @@ export class WeatherService {
   }*/
   constructor() {}
 
-  async getWeatherAsQueue(
-    latitude: number,
-    longitude: number
-  ): Promise<any> {
-    this.requestsQueue.push({ latitude, longitude, id: "id" });
-    return new Promise((resolve, reject) => {
-      /* 
-        this.requestsQueue.push({ latitude, longitude, resolve });
-      })*/
-    });
-  }
+  // async getWeatherAsQueue(
+  //   latitude: number,
+  //   longitude: number
+  // ): Promise<any> {
+  //   this.requestsQueue.push({ latitude, longitude, id: "id" });
+  //   return new Promise((resolve, reject) => {
+  //     /*
+  //       this.requestsQueue.push({ latitude, longitude, resolve });
+  //     })*/
+  //   });
+  // }
 
-  async getWeather(
-    latitude: number,
-    longitude: number
-  ): Promise<any> {
+  async getWeather(latitude: number, longitude: number): Promise<any> {
     try {
       const weather = await axios.get(
         this.weatherConfig.basePath +
           querystring.stringify({
             appid: this.weatherConfig.apiKey,
             lat: latitude,
-            lon: longitude
+            lon: longitude,
+            units: "metric"
           })
       );
       return weather.data;

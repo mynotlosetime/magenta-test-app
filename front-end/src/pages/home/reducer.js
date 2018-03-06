@@ -43,7 +43,13 @@ export default function home(state = initialState, action) {
     case GEOCODER_RESPONSE:
       return state.set("mapPoint", Map(action.mapPoint));
     case WEATHER_RESPONSE:
-      return state.setIn(["weather", "loading"], false);
+      return state.set(
+        "weather",
+        Map({
+          item: action.item,
+          loading: false
+        })
+      );
     default:
       return state;
   }

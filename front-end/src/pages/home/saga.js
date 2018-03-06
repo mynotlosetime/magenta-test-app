@@ -24,23 +24,22 @@ export function* geoCoderYandex(action) {
 
   let firstGeoObject = res.geoObjects.get(0);
   const address = firstGeoObject.getAddressLine();
-  if (address) {
-    let coordinates;
 
-    if (isReverseGeocoding) {
-      coordinates = action.query;
-    } else {
-      coordinates = firstGeoObject.geometry.getCoordinates();
-    }
-    yield put(
-      geoCoderResponse({
-        address,
-        coordinates,
-        isReverseGeocoding
-      })
-    );
-    yield put(weatherRequest(coordinates));
+  let coordinates;
+
+  if (isReverseGeocoding) {
+    coordinates = action.query;
+  } else {
+    coordinates = firstGeoObject.geometry.getCoordinates();
   }
+  yield put(
+    geoCoderResponse({
+      address: address || "",
+      coordinates,
+      isReverseGeocoding
+    })
+  );
+  yield put(weatherRequest(coordinates));
 }
 
 export function* getWeather(action) {

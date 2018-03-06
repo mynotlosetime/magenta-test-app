@@ -23,6 +23,7 @@ import {
   Switch
 } from "react-router-dom";
 import "./styles.less";
+import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { logoutRequest } from "../../common/global.actions";
@@ -36,6 +37,11 @@ import {
   geoCoderResponse
 } from "./actions";
 import reducer from "./reducer";
+import {
+  makeSelectWeather,
+  makeSelectMapPoint,
+  makeSelectAddresses
+} from "./selectors";
 import saga from "./saga";
 import injectReducer from "../../../utils/injectReducer";
 import injectSaga from "../../../utils/injectSaga";
@@ -56,16 +62,17 @@ class HomePage extends React.Component {
       <div className="home-layout">
         <div className="side-panel">
           <AddressSearch
-            ref={addressSearch =>
-              (this.addressSearch = addressSearch)
-            }
+            ref={addressSearch => (this.addressSearch = addressSearch)}
             address={this.props.mapPoint.address}
             loading={this.props.addresses.loading}
             onSearch={this.onAdressSearch}
             onResultSelect={this.onAdressSelect}
             options={this.props.addresses.items}
           />
-          <WeatherView loading={this.props.weather.loading} />
+          <WeatherView
+            weather={this.props.weather.item}
+            loading={this.props.weather.loading}
+          />
         </div>
         <YaMap
           ref={map => (this.map = map)}
@@ -89,22 +96,24 @@ class HomePage extends React.Component {
   onMapPointSelect = coordinates => {
     this.props.dispatch(geoCoderRequest(coordinates));
   };
-
-  // onGeocoderResponse = coordinates => {
-
-  //   this.addressSearch.setSearchValue(addressWithCoord.address);
-  //   this.props.dispatch(weatherRequest(addressWithCoord.coordinates));
-  // };
 }
 
-const withConnect = connect(state => {
+// const mapStateToProps = createStructuredSelector({
+//   weather: makeSelectWeather(),
+//   addresses: makeSelectAddresses(),
+//   mapPoint: makeSelectMapPoint()
+// });
+
+const mapStateToProps = state => {
   const home = state.get("home");
   return {
     weather: home.get("weather").toJS(),
     addresses: home.get("addresses").toJS(),
     mapPoint: home.get("mapPoint").toJS()
   };
-});
+};
+
+const withConnect = connect(mapStateToProps);
 const withSaga = injectSaga({ key: "homeSaga", saga });
 const withReducer = injectReducer({
   key: "home",

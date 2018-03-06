@@ -6,6 +6,7 @@ import { compose } from "redux";
 
 export default class AddressSearch extends React.Component {
   search;
+  prevAddress;
 
   componentDidMount() {}
 
@@ -16,7 +17,6 @@ export default class AddressSearch extends React.Component {
     this.prevAddress = this.props.address;
   }
 
-  prevAddress;
   render() {
     return (
       <div className="address-search">
