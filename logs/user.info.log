@@ -450,3 +450,31 @@
           url: /weather?latitude=52.94325947497166&longitude=49.27231522656252,
           sessionId: pN3iYGEFwIVPaYPRhPxfggX3cDoAEcY-
         
+[2018-03-06 18:59:01] userInfo.INFO: 
+          user: re@re.re,
+          method: POST,
+          url: /auth/login,
+          sessionId: hRLYf5IxpGSsXvQKIiIWvAW5cBWYMR9_
+        
+[2018-03-06 18:59:48] userInfo.INFO: 
+          user: re@re.re,
+          method: POST,
+          url: /auth/login,
+          sessionId: hRLYf5IxpGSsXvQKIiIWvAW5cBWYMR9_
+        
+[2018-03-06 18:59:49] userInfo.INFO: 
+          user: re@re.re,
+          action: Auth
+      
+[2018-03-06 18:59:50] userInfo.INFO: 
+          user: re@re.re,
+          method: GET,
+          url: /auth/signal,
+          sessionId: hRLYf5IxpGSsXvQKIiIWvAW5cBWYMR9_
+        
+[2018-03-06 18:59:56] userInfo.INFO: 
+          user: re@re.re,
+          method: GET,
+          url: /weather?latitude=53.0960666&longitude=49.8912888,
+          sessionId: hRLYf5IxpGSsXvQKIiIWvAW5cBWYMR9_
+        
