@@ -15,22 +15,36 @@ export class UserService {
     @Inject("UsersLogger") private readonly usersLogger
   ) {}
 
-  static async createTestData(): Promise<User> {
-    const person = User.create<User>(
+  static async createTestData(): Promise<any> {
+    const alice = User.create<User>(
       {
-        email: "re@re.re",
-        age: 99,
+        email: "alice@mail.com",
+        age: 18,
         password: "123",
         profile: {
-          firstName: "Bob",
-          lastName: "Alice"
+          firstName: "Alice",
+          lastName: "Stone"
         }
       },
       {
         include: [Profile]
       }
     );
-    return person;
+    const bob = User.create<User>(
+      {
+        email: "bob@mail.com",
+        age: 45,
+        password: "321",
+        profile: {
+          firstName: "Bob",
+          lastName: "Servantes"
+        }
+      },
+      {
+        include: [Profile]
+      }
+    );
+    return [alice, bob];
   }
 
   async login(loginData): Promise<User> {

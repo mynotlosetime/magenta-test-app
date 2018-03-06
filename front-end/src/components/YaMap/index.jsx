@@ -29,14 +29,21 @@ export default class YaMap extends React.Component {
       var coords = e.get("coords");
       this.onMapClick(coords);
     });
-    navigator.geolocation.getCurrentPosition(position => {
-      const coordinates = [
-        position.coords.latitude,
-        position.coords.longitude
-      ];
-      this.onMapClick(coordinates);
-      this.setMapCenter(coordinates);
-    });
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const coordinates = [
+          position.coords.latitude,
+          position.coords.longitude
+        ];
+        this.onMapClick(coordinates);
+        this.setMapCenter(coordinates);
+      },
+      error => {
+        const defaultCoordinates = [55.75, 37.62];
+        this.onMapClick(defaultCoordinates);
+        this.setMapCenter(defaultCoordinates);
+      }
+    );
   }
 
   onMapClick = coordinates => {
@@ -87,13 +94,18 @@ export default class YaMap extends React.Component {
         iconCaption: "поиск..."
       },
       {
+        iconColor: "#3f7dc5",
         preset: "islands#violetDotIconWithCaption",
         draggable: true
       }
     );
   }
   isSamePosition(coordinates) {
-    if (!this.myPlacemark) {
+    if (
+      !this.myPlacemark ||
+      !coordinates ||
+      !this.myPlacemark.geometry.getCoordinates()
+    ) {
       return false;
     } else {
       return (
