@@ -23,7 +23,6 @@ import {
   Switch
 } from "react-router-dom";
 import "./styles.less";
-import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { logoutRequest } from "../../common/global.actions";
@@ -37,11 +36,6 @@ import {
   geoCoderResponse
 } from "./actions";
 import reducer from "./reducer";
-import {
-  makeSelectWeather,
-  makeSelectMapPoint,
-  makeSelectAddresses
-} from "./selectors";
 import saga from "./saga";
 import injectReducer from "../../../utils/injectReducer";
 import injectSaga from "../../../utils/injectSaga";
@@ -63,7 +57,9 @@ class HomePage extends React.Component {
       <div className="home-layout">
         <div className="side-panel">
           <AddressSearch
-            ref={addressSearch => (this.addressSearch = addressSearch)}
+            ref={addressSearch =>
+              (this.addressSearch = addressSearch)
+            }
             address={this.props.mapPoint.address}
             loading={this.props.addresses.loading}
             onSearch={this.onAdressSearch}
@@ -98,13 +94,6 @@ class HomePage extends React.Component {
     this.props.dispatch(geoCoderRequest(coordinates));
   };
 }
-
-// const mapStateToProps = createStructuredSelector({
-//   weather: makeSelectWeather(),
-//   addresses: makeSelectAddresses(),
-//   mapPoint: makeSelectMapPoint()
-// });
-
 const mapStateToProps = state => {
   const home = state.get("home");
   return {

@@ -44,26 +44,22 @@ export default class WeatherView extends React.Component {
     );
   }
   renderWeatherView() {
-    const weatherCode = this.props.weather.weather[0].main;
+    const weatherCode = this.props.weather.weather[0].main,
+      weatherObject =
+        this.weatherTypes[weatherCode] || this.weatherTypes["Clear"];
+
     return (
       <div className="weather-layout">
         <div className="main-block">
           <div>Сейчас</div>
           <div className="icon-block">
-            <div
-              className={
-                "main-icon " +
-                this.weatherTypes[weatherCode].iconClass
-              }
-            />
+            <div className={"main-icon " + weatherObject.iconClass} />
             <div className="main-details">
               <div className="temp">
                 {this.props.weather.main.temp > 0 && "+"}
                 {Math.round(this.props.weather.main.temp)}
               </div>
-              <div className="type">
-                {this.weatherTypes[weatherCode].translate}
-              </div>
+              <div className="type">{weatherObject.translate}</div>
             </div>
           </div>
         </div>
