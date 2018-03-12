@@ -7,9 +7,10 @@ export class WeatherController {
 
   @Get()
   async getWeather(@Query() query) {
-    return await this.weatherService.getWeather(
+    const weather = await this.weatherService.getWeatherСonsistently(
       query.latitude,
       query.longitude
     );
+    return weather;
   }
 }
