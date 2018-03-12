@@ -45,6 +45,7 @@ import {
 import saga from "./saga";
 import injectReducer from "../../../utils/injectReducer";
 import injectSaga from "../../../utils/injectSaga";
+import { withRouter } from 'react-router-dom';
 
 class HomePage extends React.Component {
   basePath = "/home";
@@ -119,4 +120,4 @@ const withReducer = injectReducer({
   key: "home",
   reducer
 });
-export default compose(withReducer, withSaga, withConnect)(HomePage);
+export default withRouter(compose(withReducer, withSaga, withConnect)(HomePage));

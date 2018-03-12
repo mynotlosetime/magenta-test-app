@@ -17,6 +17,7 @@ import injectReducer from "../../../utils/injectReducer";
 import injectSaga from "../../../utils/injectSaga";
 import "./styles.less";
 import { tryLogin } from "./actions";
+import { withRouter } from 'react-router-dom';
 
 class LoginPage extends React.Component {
   render() {
@@ -52,4 +53,4 @@ const withReducer = injectReducer({
   key: "login",
   reducer
 });
-export default compose(withReducer, withSaga, withConnect)(LoginPage);
+export default withRouter(compose(withReducer, withSaga, withConnect)(LoginPage));

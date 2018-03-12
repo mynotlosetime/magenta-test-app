@@ -6,13 +6,13 @@ var WebpackCleanupPlugin = require("webpack-cleanup-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 loaders.push({
-  test: /\.scss$/,
-  loader: ExtractTextPlugin.extract({
-    fallback: "style-loader",
-    use:
-      "css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded"
-  }),
-  exclude: ["node_modules"]
+    test: /\.less$/,
+    loaders: [
+        "style-loader",
+        "css-loader?importLoaders=1",
+        "less-loader"
+    ],
+    exclude: ["node_modules"]
 });
 
 module.exports = {
@@ -37,10 +37,10 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false,
-        screw_ie8: true,
-        drop_console: true,
-        drop_debugger: true
+        warnings: true,
+        screw_ie8: false,
+        drop_console: false,
+        drop_debugger: false
       }
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),

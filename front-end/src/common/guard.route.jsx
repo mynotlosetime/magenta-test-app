@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 import { Dimmer, Loader } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -39,4 +39,4 @@ const withConnect = connect(state => {
     isForbidden: state.getIn(["global", "isForbidden"])
   };
 });
-export default compose(withConnect)(GuardRoute);
+export default withRouter(compose(withConnect)(GuardRoute));
