@@ -7,11 +7,10 @@ import { Func } from "continuation-local-storage";
 @Component()
 export class QueueService {
   private static readonly CHECK_INTERVAL: number = 200;
-
-  //очередь для запроса на удаленный сервер погоды
-  private isInit: boolean = false;
   private requestsQueue: Object[] = [];
   private requestHandleFunction: (req: Object) => Promise<any>;
+
+  private isInit: boolean = false;
 
   public init(
     requestHandleFunction: (req: Object) => Promise<any>
@@ -23,7 +22,8 @@ export class QueueService {
     );
     this.isInit = true;
   }
-  public addRequest(req: Object) {
+
+  public addRequest(req: Object): void {
     if (!this.isInit) {
       throw Error("Service is not init");
     }
@@ -32,7 +32,8 @@ export class QueueService {
 
   //если есть данные для запросов делаем их, и затем отвечаем клиентам
   private queueHandling: boolean = false;
-  private async checkQueue() {
+
+  private async checkQueue(): Promise<any> {
     if (!this.requestsQueue.length || this.queueHandling) return;
 
     const handlingQueuePart: Object[] = this.requestsQueue.slice();
