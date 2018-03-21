@@ -1,3 +1,4 @@
+import { QueueService } from "./../services/queue.service";
 import {
   Module,
   MiddlewaresConsumer,
@@ -21,6 +22,7 @@ import { AnyExceptionFilter } from "../common/filters/exception.filter";
   components: [
     UserService,
     WeatherService,
+    QueueService,
     AnyExceptionFilter,
     ...loggerProviders,
     ...userProviders,

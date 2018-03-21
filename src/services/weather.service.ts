@@ -1,3 +1,4 @@
+import { QueueService } from "./queue.service";
 import { Inject, Component } from "@nestjs/common";
 import axios from "axios";
 import config from "../config";
@@ -9,31 +10,15 @@ export class WeatherService {
   private weatherConfig = config.get("weather");
 
   //очередь для запроса на удаленный сервер погоды
-  private requestsQueue: WeatherRequest[] = [];
 
-  constructor() {
-    // переодически проверяем её
-    setInterval(
-      this.checkQueue.bind(this),
-      this.weatherConfig.requestsCheckInterval
-    );
-  }
-
-  //если есть данные для запросов делаем их, и затем отвечаем клиентам
-  private queueHandling: boolean = false;
-  private async checkQueue() {
-    if (!this.requestsQueue.length || this.queueHandling) return;
-
-    const handlingQueuePart: WeatherRequest[] = this.requestsQueue.slice();
-    this.requestsQueue.length = 0;
-
-    this.queueHandling = true;
-    for (let i = 0; i < handlingQueuePart.length; i++) {
-      const req: WeatherRequest = handlingQueuePart[i],
-        weather = await this.getWeather(req.latitude, req.longitude);
+  constructor(private readonly queueSevice: QueueService) {
+    this.queueSevice.init(async (req: WeatherRequest) => {
+      const weather = await this.getWeather(
+        req.latitude,
+        req.longitude
+      );
       req.resolve(weather);
-    }
-    this.queueHandling = false;
+    });
   }
   /* при получении запроса на погоду от клиента,
   добавляем его запрос в очередь и возвращаем промис */
@@ -42,7 +27,7 @@ export class WeatherService {
     longitude: number
   ): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.requestsQueue.push({ latitude, longitude, resolve });
+      this.queueSevice.addRequest({ latitude, longitude, resolve });
     });
   }
 
