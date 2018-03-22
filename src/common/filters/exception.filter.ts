@@ -1,4 +1,9 @@
-import { ExceptionFilter, Catch, Inject } from "@nestjs/common";
+import {
+  ExceptionFilter,
+  Catch,
+  Inject,
+  HttpStatus
+} from "@nestjs/common";
 import { HttpException } from "@nestjs/core";
 
 @Catch()
@@ -12,8 +17,8 @@ export class AnyExceptionFilter implements ExceptionFilter {
       exception instanceof HttpException;
 
     if (!isHttpException) {
-      response.status(500).json({
-        status: 500,
+      response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
         message: exception.message
       });
     } else {

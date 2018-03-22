@@ -1,5 +1,5 @@
 import { WeatherRequestDto } from "./models/dto/weatherRequest.dto";
-import { INestApplication } from "@nestjs/common";
+import { INestApplication, HttpStatus } from "@nestjs/common";
 import { ApplicationModule } from "./modules/app.module";
 import * as express from "express";
 import * as request from "supertest";
@@ -33,7 +33,7 @@ describe("=== E2E app test ===", () => {
     const loginRes: Response = await request(server)
       .post("/auth/login")
       .send(userData)
-      .expect(201);
+      .expect(HttpStatus.CREATED);
     const userCookie = loginRes.get("set-cookie");
     return userCookie;
   };
@@ -46,12 +46,12 @@ describe("=== E2E app test ===", () => {
       await request(server)
         .post("/auth/logout")
         .set("Cookie", userCookie)
-        .expect(201);
+        .expect(HttpStatus.CREATED);
     });
     it(`without session`, async () => {
       await request(server)
         .post("/auth/logout")
-        .expect(201);
+        .expect(HttpStatus.CREATED);
     });
   });
 
@@ -61,7 +61,7 @@ describe("=== E2E app test ===", () => {
     it(`fail`, async () => {
       await request(server)
         .get("/auth/signal")
-        .expect(403);
+        .expect(HttpStatus.FORBIDDEN);
     });
 
     it(`success`, async () => {
@@ -69,12 +69,12 @@ describe("=== E2E app test ===", () => {
       await request(server)
         .get("/auth/signal")
         .set("Cookie", userCookie)
-        .expect(200);
+        .expect(HttpStatus.OK);
 
       await request(server)
         .post("/auth/logout")
         .set("Cookie", userCookie)
-        .expect(201);
+        .expect(HttpStatus.CREATED);
     });
   });
 
@@ -92,7 +92,7 @@ describe("=== E2E app test ===", () => {
       await request(server)
         .post("/auth/logout")
         .set("Cookie", userCookie)
-        .expect(201);
+        .expect(HttpStatus.CREATED);
       userCookie = null;
     });
 
@@ -103,13 +103,13 @@ describe("=== E2E app test ===", () => {
       await request(server)
         .post("/auth/login")
         .send(INVALID_USER_DATA)
-        .expect(403);
+        .expect(HttpStatus.FORBIDDEN);
     });
     it(`wrong format user data`, async () => {
       await request(server)
         .post("/auth/login")
         .send("STRING")
-        .expect(403);
+        .expect(HttpStatus.FORBIDDEN);
     });
   });
 
@@ -135,33 +135,33 @@ describe("=== E2E app test ===", () => {
         .get("/weather")
         .set("Cookie", userCookie)
         .query(VALID_WEATHER_DATA)
-        .expect(200);
+        .expect(HttpStatus.OK);
     });
     it(`invalid data`, async () => {
       await request(server)
         .get("/weather")
         .set("Cookie", userCookie)
         .query(INVALID_WEATHER_DATA)
-        .expect(500);
+        .expect(HttpStatus.INTERNAL_SERVER_ERROR);
     });
     it(`wrong format data`, async () => {
       await request(server)
         .get("/weather")
         .set("Cookie", userCookie)
         .query({ sod: "STRING" })
-        .expect(500);
+        .expect(HttpStatus.INTERNAL_SERVER_ERROR);
     });
     it(`empty data`, async () => {
       await request(server)
         .get("/weather")
         .set("Cookie", userCookie)
-        .expect(500);
+        .expect(HttpStatus.INTERNAL_SERVER_ERROR);
     });
     it(`anonymous user valid data`, async () => {
       await request(server)
         .get("/weather")
         .query(VALID_WEATHER_DATA)
-        .expect(403);
+        .expect(HttpStatus.FORBIDDEN);
     });
   });
 });
