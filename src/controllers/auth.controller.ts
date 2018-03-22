@@ -36,11 +36,13 @@ export class AuthController {
   }
   @Post("logout")
   async logout(@Req() req) {
-    this.usersLogger.info(`
+    if (req.session && req.session.user) {
+      this.usersLogger.info(`
           user: ${req.session.user.email},
           action: Logout
     `);
-    req.session.destroy();
+      req.session.destroy();
+    }
     return true;
   }
   @Get("signal")

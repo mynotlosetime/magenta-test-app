@@ -13,11 +13,15 @@ export class WeatherService {
 
   constructor(private readonly queueSevice: QueueService) {
     this.queueSevice.init(async (req: WeatherRequest) => {
-      const weather = await this.getWeather(
-        req.latitude,
-        req.longitude
-      );
-      req.resolve(weather);
+      try {
+        const weather = await this.getWeather(
+          req.latitude,
+          req.longitude
+        );
+        req.resolve(weather);
+      } catch (e) {
+        req.reject(e);
+      }
     });
   }
   /* при получении запроса на погоду от клиента,
@@ -27,7 +31,12 @@ export class WeatherService {
     longitude: number
   ): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.queueSevice.addRequest({ latitude, longitude, resolve });
+      this.queueSevice.addRequest({
+        latitude,
+        longitude,
+        resolve,
+        reject
+      });
     });
   }
 
@@ -58,4 +67,5 @@ interface WeatherRequest {
   latitude: number;
   longitude: number;
   resolve: Function;
+  reject: Function;
 }

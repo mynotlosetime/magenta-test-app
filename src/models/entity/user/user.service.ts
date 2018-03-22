@@ -6,6 +6,7 @@ import { Profile } from "../profile/profile.entity";
 import { DataConst } from "../../database.constants";
 import { HttpException } from "@nestjs/core";
 import { ForbiddenException } from "../../../common/exceptions/forbidden.exceprion";
+import config from "../../../config";
 
 @Component()
 export class UserService {
@@ -16,20 +17,10 @@ export class UserService {
   ) {}
 
   static async createTestData(): Promise<any> {
-    const alice = User.create<User>(
-      {
-        email: "alice@mail.com",
-        age: 18,
-        password: "123",
-        profile: {
-          firstName: "Alice",
-          lastName: "Stone"
-        }
-      },
-      {
-        include: [Profile]
-      }
-    );
+    const defaultUser = config.get("defaultUser");
+    const alice = User.create<User>(defaultUser, {
+      include: [Profile]
+    });
     const bob = User.create<User>(
       {
         email: "bob@mail.com",
