@@ -8,6 +8,7 @@ export class AnyExceptionFilter implements ExceptionFilter {
   ) {}
   catch(exception, response) {
     const isHttpException: boolean =
+      exception.constructor.name == "HttpException" ||
       exception instanceof HttpException;
 
     if (!isHttpException) {
@@ -17,6 +18,7 @@ export class AnyExceptionFilter implements ExceptionFilter {
       });
     } else {
       const status = exception.getStatus();
+
       response.status(status).json({
         status,
         message: exception.response

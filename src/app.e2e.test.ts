@@ -7,7 +7,7 @@ import { bootstrap } from "./server";
 import { Response } from "superagent";
 import config from "./config";
 
-describe("E2E app test", () => {
+describe("=== E2E app test ===", () => {
   let server;
   let defaultUser = config.get("defaultUser");
 
@@ -120,39 +120,48 @@ describe("E2E app test", () => {
       latitude: 55.75,
       longitude: 37.62
     };
-
     const INVALID_WEATHER_DATA: WeatherRequestDto = {
       latitude: 555.75,
       longitude: 937.62
     };
 
     let userCookie;
-
     beforeAll(async () => {
       userCookie = await login(VALID_USER_DATA);
     });
+
     it(`valid data`, async () => {
       await request(server)
         .get("/weather")
+        .set("Cookie", userCookie)
         .query(VALID_WEATHER_DATA)
         .expect(200);
     });
     it(`invalid data`, async () => {
       await request(server)
         .get("/weather")
+        .set("Cookie", userCookie)
         .query(INVALID_WEATHER_DATA)
         .expect(500);
     });
     it(`wrong format data`, async () => {
       await request(server)
         .get("/weather")
-        .query("STRING")
+        .set("Cookie", userCookie)
+        .query({ sod: "STRING" })
         .expect(500);
     });
     it(`empty data`, async () => {
       await request(server)
         .get("/weather")
+        .set("Cookie", userCookie)
         .expect(500);
+    });
+    it(`anonymous user valid data`, async () => {
+      await request(server)
+        .get("/weather")
+        .query(VALID_WEATHER_DATA)
+        .expect(403);
     });
   });
 });

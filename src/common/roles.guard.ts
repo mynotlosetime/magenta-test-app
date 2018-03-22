@@ -1,8 +1,4 @@
-import {
-  Guard,
-  CanActivate,
-  ExecutionContext
-} from "@nestjs/common";
+import { Guard, CanActivate, ExecutionContext } from "@nestjs/common";
 import { Observable } from "rxjs/Observable";
 import { AuthController } from "../controllers/auth.controller";
 
@@ -14,6 +10,9 @@ export class RolesGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const isPermitController =
       context.parent.name == AuthController.name;
-    return isPermitController || dataOrRequest.session;
+    return (
+      isPermitController ||
+      (dataOrRequest.session && dataOrRequest.session.user)
+    );
   }
 }
