@@ -9,6 +9,9 @@ import {
 import { UserService } from "../models/entity/user/user.service";
 import config from "../config";
 import { ForbiddenException } from "../common/exceptions/forbidden.exceprion";
+import { LoginDataDto } from "../models/dto/loginData.dto";
+import { ApiOperation } from "@nestjs/swagger";
+import { apiDoc } from "./endPoints.doc";
 
 @Controller("auth")
 export class AuthController {
@@ -17,8 +20,9 @@ export class AuthController {
     private readonly usersService: UserService
   ) {}
 
+  @ApiOperation(apiDoc.LOGIN)
   @Post("login")
-  async login(@Body() loginData: any, @Req() req) {
+  async login(@Body() loginData: LoginDataDto, @Req() req) {
     const user = await this.usersService.login(loginData);
     if (user) {
       const isUserAuth = req.session.user;
@@ -34,6 +38,8 @@ export class AuthController {
       throw new ForbiddenException("Incorrect login data");
     }
   }
+
+  @ApiOperation(apiDoc.LOGOUT)
   @Post("logout")
   async logout(@Req() req) {
     if (req.session && req.session.user) {
@@ -45,6 +51,8 @@ export class AuthController {
     }
     return true;
   }
+
+  @ApiOperation(apiDoc.SIGNAL)
   @Get("signal")
   async signal(@Req() req) {
     if (req.session.user) {
