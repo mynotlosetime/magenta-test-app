@@ -46,6 +46,9 @@ export class WeatherService {
     latitude: number,
     longitude: number
   ): Promise<any> {
+    if (!this.isValidCoordinates(latitude, longitude)) {
+      throw new Error("Invalid coordinates value");
+    }
     try {
       const weather = await axios.get(
         this.weatherConfig.basePath +
@@ -60,6 +63,12 @@ export class WeatherService {
     } catch (e) {
       throw new Error("Weather api response error");
     }
+  }
+  isValidCoordinates(latitude: number, longitude: number): boolean {
+    const isValidLatitude: boolean = latitude > -90 && latitude < 90;
+    const isValidLongitude: boolean =
+      longitude > -180 && longitude < 180;
+    return isValidLatitude && isValidLongitude;
   }
 }
 

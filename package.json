@@ -8,7 +8,7 @@
     "start:watch": "nodemon",
     "prestart:prod": "tsc",
     "start:prod": "node dist/server.js",
-    "test": "jest ./src"
+    "test": "jest ./src -i"
   },
   "dependencies": {
     "@nestjs/common": "^4.6.5",
@@ -47,13 +47,6 @@
     },
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }

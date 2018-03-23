@@ -7,7 +7,7 @@ import { bootstrap } from "./server";
 import { Response } from "superagent";
 import config from "./config";
 
-describe("=== E2E app test ===", () => {
+describe("=== [E2E] app test ===", () => {
   let server;
   let defaultUser = config.get("defaultUser");
 
@@ -25,7 +25,7 @@ describe("=== E2E app test ===", () => {
   });
   afterAll(() => {
     server.close(() => {
-      setTimeout(() => process.exit(0), 0);
+      // setTimeout(() => process.exit(0), 0);
     });
   });
 
