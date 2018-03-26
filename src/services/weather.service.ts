@@ -5,27 +5,41 @@ import config from "../config";
 import * as querystring from "querystring";
 import { Func } from "continuation-local-storage";
 
+/**
+ * WeatherService - сервис для запросов данных о погоде
+ */
 @Component()
 export class WeatherService {
   private weatherConfig = config.get("weather");
 
-  //очередь для запроса на удаленный сервер погоды
-
   constructor(private readonly queueSevice: QueueService) {
-    this.queueSevice.init(async (req: WeatherRequest) => {
-      try {
-        const weather = await this.getWeather(
-          req.latitude,
-          req.longitude
-        );
-        req.resolve(weather);
-      } catch (e) {
-        req.reject(e);
-      }
-    });
+    this.initQueueService();
   }
-  /* при получении запроса на погоду от клиента,
-  добавляем его запрос в очередь и возвращаем промис */
+
+  /** Инициализация сервиса последовательны обработки запросов */
+  initQueueService(): void {
+    this.queueSevice.init(this.requestHandler);
+  }
+
+  /** Обработчик запроса для {@link QueueService} на данные о погоде */
+  requestHandler = async (req: WeatherRequest) => {
+    try {
+      const weather = await this.getWeather(
+        req.latitude,
+        req.longitude
+      );
+      req.resolve(weather);
+    } catch (e) {
+      req.reject(e);
+    }
+  };
+
+  /**
+   * Получение погоды последовательно
+   * Добавляем запрос в очередь и возвращаем промис.
+   * @param latitude - широта.
+   * @param longitude - долгота.
+   */
   getWeatherСonsistently(
     latitude: number,
     longitude: number
@@ -40,8 +54,12 @@ export class WeatherService {
     });
   }
 
-  /* метод для получения погоды (может так же использоваться снаружи напрямую, 
-  если не нужны последовательные запросы) */
+  /**
+   * Метод для получения погоды (может так же использоваться
+   * снаружи напрямую, если не нужны последовательные запросы).
+   * @param latitude - широта
+   * @param longitude - долгота
+   * */
   async getWeather(
     latitude: number,
     longitude: number
@@ -64,6 +82,12 @@ export class WeatherService {
       throw new Error("Weather api response error");
     }
   }
+
+  /**
+   * Валидация географических координат.
+   * @param latitude - широта
+   * @param longitude - долгота
+   */
   isValidCoordinates(latitude: number, longitude: number): boolean {
     const isValidLatitude: boolean = latitude > -90 && latitude < 90;
     const isValidLongitude: boolean =
@@ -72,6 +96,10 @@ export class WeatherService {
   }
 }
 
+/**
+ * WeatherRequest - обьект запроса для
+ *  {@link QueueService.requestHandleFunction}
+ */
 interface WeatherRequest {
   latitude: number;
   longitude: number;

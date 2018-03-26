@@ -7,6 +7,10 @@ import { AnyExceptionFilter } from "./common/filters/exception.filter";
 import { INestApplication } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 
+/**
+ * Главная функция инициализирующая приложение.
+ * @param port порт для Http сервера.
+ */
 export async function bootstrap(port?: number) {
   const app: INestApplication = await NestFactory.create(
     ApplicationModule
@@ -24,7 +28,10 @@ export async function bootstrap(port?: number) {
   await app.listen(port || 3000);
   return app;
 }
-
+/**
+ * Инициализация middwares
+ * @param app инстанс nest пиложения.
+ */
 export function initMiddlewares(app: INestApplication) {
   app.useGlobalGuards(new RolesGuard());
   app.use(bodyParser.json());

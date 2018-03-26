@@ -14,8 +14,7 @@ import NoJSON from "../../../common/NoJSON.decorator";
   tableName: "profiles"
 })
 export class Profile extends CustomModel<Profile> {
-  @Column 
-  firstName: string;
+  @Column firstName: string;
 
   @NoJSON()
   @Column

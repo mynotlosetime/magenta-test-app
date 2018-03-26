@@ -6,12 +6,12 @@ import {
   Req,
   Inject
 } from "@nestjs/common";
-import { UserService } from "../models/entity/user/user.service";
 import config from "../config";
 import { ForbiddenException } from "../common/exceptions/forbidden.exceprion";
 import { LoginDataDto } from "../models/dto/loginData.dto";
 import { ApiOperation } from "@nestjs/swagger";
 import { apiDoc } from "./endPoints.doc";
+import { UserService } from "../services/user.service";
 
 @Controller("auth")
 export class AuthController {

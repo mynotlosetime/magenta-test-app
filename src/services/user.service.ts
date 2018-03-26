@@ -1,13 +1,15 @@
 import { Component, Inject, HttpStatus } from "@nestjs/common";
 import { Model } from "sequelize-typescript";
-import { User } from "./user.entity";
 import { Sequelize } from "sequelize-typescript/lib/models/Sequelize";
-import { Profile } from "../profile/profile.entity";
-import { DataConst } from "../../database.constants";
+import { DataConst } from "../models/database.constants";
 import { HttpException } from "@nestjs/core";
-import { ForbiddenException } from "../../../common/exceptions/forbidden.exceprion";
-import config from "../../../config";
+import { ForbiddenException } from "../common/exceptions/forbidden.exceprion";
+import config from "../config";
+import { Profile } from "../models/entity/profile/profile.entity";
+import { User } from "../models/entity/user/user.entity";
+import { LoginDataDto } from "../models/dto/loginData.dto";
 
+/** UserService - сервис для управления пользователями */
 @Component()
 export class UserService {
   constructor(
@@ -16,6 +18,7 @@ export class UserService {
     @Inject("UsersLogger") private readonly usersLogger
   ) {}
 
+  /** Создание пользователей для приложения. */
   static async createTestData(): Promise<any> {
     const defaultUser = config.get("defaultUser");
     const alice = User.create<User>(defaultUser, {
@@ -38,7 +41,11 @@ export class UserService {
     return [alice, bob];
   }
 
-  async login(loginData): Promise<User> {
+  /** Поиск пользователя и проверка пароля
+   * @param loginData - данные для поиска
+   * @return - промис с данными пользователя
+   */
+  async login(loginData: LoginDataDto): Promise<User> {
     const user: User = await User.findOne<User>({
       where: { email: loginData.email },
       include: [Profile]
@@ -55,6 +62,7 @@ export class UserService {
     return null;
   }
 
+  //** Поиск всех пользователей */
   async findAll(): Promise<User[]> {
     return await this.usersRepository.findAll<User>();
   }

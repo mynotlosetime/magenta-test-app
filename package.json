@@ -1,13 +1,14 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "magenta-test-app",
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "magenta-test-app",
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
     "start:watch": "nodemon",
     "prestart:prod": "tsc",
     "start:prod": "node dist/server.js",
+    "doc:generate": "typedoc --out ./doc ./src",
     "test": "jest -i"
   },
   "dependencies": {
@@ -46,18 +47,9 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "roots": [
-      "./src"
-    ],
+    "roots": ["./src"],
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }
