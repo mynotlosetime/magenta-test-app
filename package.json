@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^4.6.5",
-    "@nestjs/core": "^4.6.5",
+    "@nestjs/core": "^9.2.1",
     "@nestjs/microservices": "^4.6.5",
     "@nestjs/swagger": "^1.1.4",
     "@nestjs/testing": "^4.6.1",
